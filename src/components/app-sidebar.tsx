@@ -13,11 +13,16 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { currentUser } from "@/lib/mock-data";
+
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
   { title: "ลงทะเบียนเรียน", url: "/enrollment", icon: BookOpen },
-  { title: "ตารางเรียน", url: "/schedule", icon: Calendar },
-  { title: "ตั้งค่า", url: "/settings", icon: Settings },
+  //{ title: "ตารางเรียน", url: "/schedule", icon: Calendar },
+  //{ title: "ตั้งค่า", url: "/settings", icon: Settings },
 ];
 
 export function AppSidebar() {
@@ -49,6 +54,24 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+
+      <div className="p-3">
+        <Separator className="mb-3" />
+        <div className="flex items-center gap-3">
+          <Avatar>
+            <AvatarImage src={currentUser.avatar} />
+            <AvatarFallback>{currentUser.nickname.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="flex min-w-0 flex-1 flex-col">
+            <span className="truncate text-sm font-medium">
+              {currentUser.nickname}
+            </span>
+            <Badge variant="secondary" className="mt-1 w-fit text-xs">
+              {currentUser.role}
+            </Badge>
+          </div>
+        </div>
+      </div>
     </Sidebar>
   );
 }
